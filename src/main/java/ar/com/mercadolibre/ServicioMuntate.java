@@ -77,7 +77,7 @@ public class ServicioMuntate {
     @POST    
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("Stats")
+    @Path("stats")
     public StatsPOJO Stats() {
     	try {   	
     	  
