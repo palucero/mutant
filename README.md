@@ -1,5 +1,7 @@
-# Examen de Mercado Libre - isMutant
+﻿# Examen de Mercado Libre - isMutant
 Autor: Pablo Lucero
+
+[![Coverage Status](https://coveralls.io/repos/github/palucero/mutant/badge.svg)](https://coveralls.io/github/palucero/mutant)
 
 Hola! Soy programador backend en .NET / PL-SQL / T-SQL pero tomé el examen como un desafío para involucrarme con Java (cada tanto tenemos que salirnos de nuestra zona de confort). Doy fe de que ha sido exigente!!  y he aprendido más de lo que esperaba :)
 
