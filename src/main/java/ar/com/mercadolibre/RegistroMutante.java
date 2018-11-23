@@ -5,8 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegistroMutante extends Thread {
+	
+	private final Logger logger = Logger.getLogger(RegistroMutante.class.getName());
 
 	private int esMutante;
 
@@ -41,8 +45,8 @@ public class RegistroMutante extends Thread {
 				preparedStatement.setInt(1, esMutante);
 				preparedStatement.executeUpdate();
 
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
+			} catch (SQLException ex) {
+				logger.log(Level.SEVERE, "Excepcion lanzada:", ex.getMessage());
 			} finally {
 				if (preparedStatement != null) {
 					preparedStatement.close();
@@ -52,10 +56,10 @@ public class RegistroMutante extends Thread {
 					connection.close();
 				}
 			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Excepcion lanzada:", ex.getMessage());
+		} catch (Exception ex) {
+			logger.log(Level.SEVERE, "Excepcion lanzada:", ex.getMessage());
 		}
 	}
 
@@ -90,8 +94,8 @@ public class RegistroMutante extends Thread {
 					indice = 0;
 				}
 
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
+			} catch (SQLException ex) {
+				logger.log(Level.SEVERE, "Excepcion lanzada:", ex.getMessage());
 			} finally {
 				if (preparedStatement != null) {
 					preparedStatement.close();
@@ -100,11 +104,9 @@ public class RegistroMutante extends Thread {
 				if (connection != null) {
 					connection.close();
 				}
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			}		
+		} catch (Exception ex) {
+			logger.log(Level.SEVERE, "Excepcion lanzada:", ex.getMessage());
 		}
 
 	}

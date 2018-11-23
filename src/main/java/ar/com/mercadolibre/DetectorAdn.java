@@ -5,12 +5,16 @@
  */
 package ar.com.mercadolibre;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author palucero
  */
 public class DetectorAdn {
 
+	private final Logger logger = Logger.getLogger(DetectorAdn.class.getName());
 
 	public void setArrayMatrizCuadrada(char[] array, int posicion) {
 		this.MatrizCuadrada[posicion] = array;
@@ -26,12 +30,12 @@ public class DetectorAdn {
 			for (int i = 0; i < data.length; i++) {
 
 				if (!data[i].matches("[ATCGatcg]*")) {
-					System.out.println("ERROR: Tiene letras fuera del dominio ATCG");
+					logger.log(Level.WARNING, "ERROR: Tiene letras fuera del dominio ATCG");
 					return false;
 				}
 
 				if (data[i].length() != data.length) {
-					System.out.println("ERROR: una cadena tiene tamaño distinto al de la matriz");
+					logger.log(Level.WARNING, "ERROR: una cadena tiene tamaño distinto al de la matriz");
 					return false;
 				}
 
@@ -41,6 +45,7 @@ public class DetectorAdn {
 
 			return true;
 		} catch (Exception ex) {
+			logger.log(Level.SEVERE, "Excepcion lanzada:", ex.getMessage());
 			return false;
 		}
 
@@ -65,7 +70,7 @@ public class DetectorAdn {
 
 			do {
 				for (int x = 0; x < longitudMatriz; x++) {
-					System.out.println("Fila " + x);
+					
 					if (contadorCadenasEncontradas < 2) {
 						for (int y = 0; y < longitudMatriz; y++) {
 
@@ -76,9 +81,8 @@ public class DetectorAdn {
 								if ((y + 4) <= longitudMatriz) {
 									if (BuscaHorizontal(x, y, posicionActual)) {
 										contadorCadenasEncontradas++;
-
-										System.out.println(
-												"Encontró cadena " + posicionActual + " en Horizontal:" + x + "," + y);
+ 
+										logger.log(Level.INFO, "Encontró cadena " + posicionActual + " en Horizontal:" + x + "," + y);
 									}
 								}
 							} else {
@@ -89,8 +93,9 @@ public class DetectorAdn {
 								if ((x + 4) <= longitudMatriz) {
 									if (BuscaVertical(x, y, posicionActual)) {
 										contadorCadenasEncontradas++;
-										System.out.println(
-												"Encontró cadena " + posicionActual + " en Vertical:" + x + "," + y);
+										 
+										
+										logger.log(Level.INFO, "Encontró cadena " + posicionActual + " en Vertical:" + x + "," + y);
 									}
 								}
 							} else {
@@ -102,8 +107,10 @@ public class DetectorAdn {
 									if ((x + 4) <= longitudMatriz) {
 										if (BuscaDiagonal(x, y, posicionActual)) {
 											contadorCadenasEncontradas++;
-											System.out.println("Encontró cadena " + posicionActual + " en Diagonal:" + x
-													+ "," + y);
+											
+											logger.log(Level.INFO, "Encontró cadena " + posicionActual + " en Diagonal:" + x
+													+ "," + y);										
+										 
 										}
 									}
 								}
@@ -116,8 +123,11 @@ public class DetectorAdn {
 									if ((x + 4) <= longitudMatriz) {
 										if (BuscaDiagonalInversa(x, y, posicionActual)) {
 											contadorCadenasEncontradas++;
-											System.out.println("Encontró cadena " + posicionActual
-													+ " en DiagonalInversa:" + x + "," + y);
+											
+											logger.log(Level.INFO, "Encontró cadena " + posicionActual
+													+ " en DiagonalInversa:" + x + "," + y);	
+											
+											 
 										}
 									}
 								}
@@ -141,7 +151,7 @@ public class DetectorAdn {
 
 				} catch (Exception ex) {
 
-					System.out.println("ERROR:" + ex.getMessage());
+					logger.log(Level.SEVERE, "Excepcion lanzada:", ex.getMessage());
 				} finally {
 					return true;
 				}
@@ -156,14 +166,14 @@ public class DetectorAdn {
 
 				} catch (Exception ex) {
 
-					System.out.println("ERROR:" + ex.getMessage());
+					logger.log(Level.SEVERE, "Excepcion lanzada:", ex.getMessage());
 				} finally {
 					return false;
 				}
 			}
 		} catch (Exception ex) {
 
-			System.out.println("ERROR:" + ex.getMessage());
+			logger.log(Level.SEVERE, "Excepcion lanzada:", ex.getMessage());
 			return false;
 		}
 
